@@ -22,13 +22,14 @@ import io.swagger.inflector.models.ResponseContext;
 import io.swagger.inflector.utils.ApiException;
 import io.swagger.sample.models.Dog;
 import io.swagger.test.models.Address;
+import io.swagger.test.models.ExtendedAddress;
 import io.swagger.test.models.User;
 
+import java.util.List;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import java.io.File;
-import java.util.List;
 
 public class TestController {
     public io.swagger.inflector.models.ResponseContext uploadFile(io.swagger.inflector.models.RequestContext request, File inputFile, String stringMetadata, Integer integerMetadata) {
@@ -90,6 +91,15 @@ public class TestController {
     public ResponseContext withModelArray(RequestContext request, String id, Address[] modelArray) {
         return new ResponseContext()
             .status(Status.OK);
+    }
+
+    public ResponseContext withComposedModel(RequestContext request, ExtendedAddress address) {
+        return new ResponseContext().status(Status.OK);
+    }
+
+    public ResponseContext withComposedModelArray(RequestContext request,
+            ExtendedAddress[] addresses) {
+        return new ResponseContext().status(Status.OK);
     }
 
     public ResponseContext arrayInputTest(RequestContext request, List<String> users) {

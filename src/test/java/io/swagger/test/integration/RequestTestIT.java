@@ -19,6 +19,7 @@ package io.swagger.test.integration;
 import io.swagger.test.client.ApiClient;
 import io.swagger.test.client.ApiException;
 import io.swagger.test.models.Address;
+import io.swagger.test.models.ExtendedAddress;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
 
@@ -69,6 +70,20 @@ public class RequestTestIT {
         client.invokeAPI("/withModelArray/3", "POST", new HashMap<String, String>(),
                 Arrays.asList(first, second), new HashMap<String, String>(), null,
                 "application/json", null, new String[0]);
+    }
+
+    @Test(expectedExceptions = ApiException.class)
+    public void verifyComposedModelValidation() throws Exception {
+        client.invokeAPI("/withComposedModel", "POST", new HashMap<String, String>(),
+                new ExtendedAddress(), new HashMap<String, String>(), null, "application/json",
+                null, new String[0]);
+    }
+
+    @Test(expectedExceptions = ApiException.class)
+    public void verifyComposedModelArrayValidation() throws Exception {
+        client.invokeAPI("/withComposedModelArray", "POST", new HashMap<String, String>(),
+                Arrays.asList(new ExtendedAddress(), new ExtendedAddress()),
+                new HashMap<String, String>(), null, "application/json", null, new String[0]);
     }
 
     @Test
